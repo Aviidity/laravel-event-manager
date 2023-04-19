@@ -39,6 +39,17 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
+        'id',
         'email_verified_at' => 'datetime',
     ];
+
+    public function createdEvents() // The events the user created
+    {
+        return $this->hasMany(Event::class);
+    }
+
+    public function attendingEvents() // The events the user is attending to
+    {
+        return $this->belongsToMany(Event::class, 'user_event_attendees');
+    }
 }

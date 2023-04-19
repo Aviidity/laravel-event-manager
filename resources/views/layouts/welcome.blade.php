@@ -11,7 +11,6 @@
 </head>
 
 <body style="background-color: #DFDFDF;">
-    @include('partials.header')
     <div style="padding: 0 200px;">
         @yield('content')
     </div>
