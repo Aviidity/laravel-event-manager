@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventsController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.welcome');
-});
+Route::get('/', function () { return view('app'); });
+Route::get('/home', function () { return view('layouts.home'); });
 
 Route::get('events', [EventsController::class, 'index'])->name('events');
 Route::get('events/create',[EventsController::class, 'create']);
@@ -28,8 +28,14 @@ Route::get('events/{id?}/edit', [EventsController::class, 'edit']);
 Route::put('events/{id?}', [EventsController::class, 'update']);
 
 Route::fallback(function () {
-    return view('partials.response',[
+    return view('layouts.response',[
         'msg' => 'The site your trying to access is not available',
         'status' => 404
     ]);
 });
+
+/**
+ * Route implementation for register, login and logout and others...
+ */
+Auth::routes();
+
